@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "indent": 2
+  },
+  "globals": {
+    "describe": true,
+    "it": false,
+    "beforeEach": true,
+    "before": true,
+    "xit": false,
+    "afterEach": true,
+    "mountWithIntl": true,
+    "shallowWithIntl": true
+  }
+}
