@@ -1,6 +1,7 @@
-const Oauth2 = require('simple-oauth2');
+const oauth2 = require('simple-oauth2');
+import NULL_LOGGER from './logger';
 
-export default function authentication(clientId, secret, logger) {
+export default function authentication(clientId, secret, logger = NULL_LOGGER) {
   const credentials = {
     client: {
       id: clientId,
@@ -12,18 +13,30 @@ export default function authentication(clientId, secret, logger) {
       tokenPath: '/oauth2/v1/authorize',
     },
   };
-
+  const instance = oauth2.create(credentials);
   return {
     credentials,
+    instance,
 
     getAccessCodeUri(redirectUri) {
-      const oauth2 = Oauth2.create(credentials);
-      const authorizationUri = oauth2.authorizationCode.authorizeURL({
+      const authorizationUri = this.instance.authorizationCode.authorizeURL({
         redirect_uri: redirectUri,
         scope: 'CompanyFile',
       });
 
       return authorizationUri;
+    },
+
+    async refresh(currentToken) {
+      logger.info('refreshing token', currentToken);
+
+      const token = this.instance.accessToken.create({
+        access_token: currentToken.accessToken,
+        refresh_token: currentToken.refreshToken,
+      });
+
+      const result = await token.refresh();
+      return result.token;
     },
 
     getToken(code, redirectUri) {
@@ -34,12 +47,10 @@ export default function authentication(clientId, secret, logger) {
         scope: 'CompanyFile',
       };
 
-      const oauth2 = Oauth2.create(credentials);
+      logger.info('credentials object being passed is ', credentials);
+      logger.info('params being passed to accessToken call ', params);
 
-      logger.trace('credentials object being passed is ', credentials);
-      logger.trace('params being passed to accessToken call ', params);
-
-      return oauth2.authorizationCode.getToken(params)
+      return this.instance.authorizationCode.getToken(params)
                    .then(result => oauth2.accessToken.create(result));
     },
   };

@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-import rateLimit from './rate_limit';
-import expiredToken from './expired_token';
+import rateLimit from './interceptors/rate_limit';
+import expiredToken from './interceptors/expired_token';
+import authentication from './authentication';
 
 const pack = require('../package');
 
 export default class Client {
   constructor({ clientId,
                 secret,
-                token, refreshToken, logger, callback, username, password,
-                timeout = 3000, apiBase = 'https://api.myob.com/accountright/' }) {
+                token = { }, logger, callback = () => {}, username, password,
+                timeout = 5000, apiBase = 'https://api.myob.com/accountright/' }) {
     this.apiBase = apiBase;
     this.token = token;
     this.logger = logger;
@@ -19,34 +20,49 @@ export default class Client {
     this.password = password;
     this.clientId = clientId;
     this.secret = secret;
-    this.refreshToken = refreshToken;
     this.timeout = timeout;
-    this.instance = this.getInstance();
+    this.callback = callback;
+    this.instance = this.getInstance(false);
   }
 
-  getInstance() {
-    this.logger.trace('Request Headers', this.getHeaders());
+  getInstance(root) {
+    this.logger.info('Request Headers', this.getHeaders(root));
 
     const instance = this.adapter.create({
       baseURL: this.apiBase,
       timeout: this.timeout,
       responseType: 'json',
-      headers: this.getHeaders(),
+      headers: this.getHeaders(root),
     });
 
     rateLimit(instance, 5);
-    expiredToken(instance, this);
+    expiredToken(instance, this, 2);
     return instance;
   }
 
-  getHeaders() {
-    return {
-      'x-myobapi-key': this.secret,
+  getHeaders(root = false) {
+    const headers = {
+      'x-myobapi-key': this.clientId,
       'x-myobapi-version': 'v2',
-      'x-myobapi-cftoken': this.getUserToken(),
       'User-Agent': `Ordermentum MYOB Client ${pack.version}`,
-      Authorization: `Bearer ${this.token}`,
+      Authorization: `Bearer ${this.token.accessToken}`,
     };
+
+    if (!root) {
+      headers['x-myobapi-cftoken'] = this.getUserToken();
+    }
+
+    return headers;
+  }
+
+  get authentication() {
+    return authentication(this.clientId, this.secret, this.logger);
+  }
+
+  getCompanyFiles() {
+    return this.getInstance(true)
+               .get('https://api.myob.com/accountright/')
+               .then(response => response.data);
   }
 
   getUserToken() {

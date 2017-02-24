@@ -5,8 +5,10 @@ describe('Client', () => {
   it('return an instance', async () => {
     const apiBase = 'https://api.myob.com';
     const logger = console;
-    const token = 'test';
-    const client = new Client({ apiBase, logger, token });
+    const token = { accessToken: 'test' };
+    const secret = 'test';
+    const clientId = 'test';
+    const client = new Client({ apiBase, secret, clientId, logger, token });
     expect(client.token).to.equal(token);
     expect(client.logger).to.equal(logger);
     expect(client.apiBase).to.equal(apiBase);
@@ -20,9 +22,10 @@ describe('Client', () => {
     this.timeout(10000);
     const apiBase = 'http://jsonip.com';
     const logger = console;
-    const token = 'test';
+    const token = { accessToken: 'test' };
     const secret = 'test';
-    const client = new Client({ apiBase, secret, logger, token });
+    const clientId = 'test';
+    const client = new Client({ apiBase, clientId, secret, logger, token });
     const data = await client.get('');
     expect(data.ip).to.not.equal(null);
     expect(data.status).to.not.equal(null);
@@ -32,9 +35,10 @@ describe('Client', () => {
     this.timeout(10000);
     const apiBase = 'http://httpstat.us';
     const logger = console;
-    const token = 'test';
+    const token = { accessToken: 'test' };
     const secret = 'test';
-    const client = new Client({ apiBase, secret, logger, token });
+    const clientId = 'test';
+    const client = new Client({ apiBase, clientId, secret, logger, token });
 
     let thrown = false;
 

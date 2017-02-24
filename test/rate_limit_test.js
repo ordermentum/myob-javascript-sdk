@@ -1,9 +1,11 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
-import rateLimit from '../src/rate_limit';
+import axios from 'axios';
+import rateLimit from '../src/interceptors/rate_limit';
 
 describe('rateLimit', () => {
   it('works', () => {
-    rateLimit();
+    const instance = axios.create();
+    rateLimit(instance);
   });
 });

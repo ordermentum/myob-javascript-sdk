@@ -11,7 +11,7 @@ export default function rateLimit(instance, retries = 5, wait = 1000) {
     config.rateRetryRequest = config.rateRetryRequest || 0;
     const canTry = (!config.rateRetryRequest || config.rateRetryRequest < retries);
 
-    if (error.response.status === 403 && canTry) {
+    if (error.code !== 'ECONNABORTED' && error.response.status === 403 && canTry) {
       config.rateRetryRequest += 1;
 
       if (axios.defaults.agent === config.agent) {
