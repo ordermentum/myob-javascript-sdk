@@ -9,7 +9,7 @@ const client = createClient({
   logger: console,
 });
 
-
-client.invoiceItems.findAll().then(invoices => {
-  console.log(invoices);
+const salesCode = 'GST';
+client.accounts.findOne({ filter: `DisplayID eq'${salesCode}'` }).then(account => {
+  console.log(account);
 }).catch(e => console.error(e));

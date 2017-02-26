@@ -15,7 +15,6 @@ export default function expiredToken(instance, client, retries = 5) {
       config.expiredTokenRetry += 1;
 
       return client.authentication.refresh(client.token).then((token) => {
-        console.log('dog.....', token);
         config.headers.Authorization = `Bearer ${token.access_token}`;
         client.callback(token);
         return instance(config);

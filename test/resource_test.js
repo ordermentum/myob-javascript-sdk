@@ -34,7 +34,7 @@ describe('resource', () => {
     const cat = { name: 'droppo' };
     const getStub = sinon.stub(FAKE_CLIENT, 'get')
                          .returns(new Promise(resolve => resolve({ Cat: [cat] })));
-    const response = await cats.findOne({ species: 'tiger' });
+    const response = await cats.findOne({ filter: 'DisplayName eq\'tiger\'' });
     expect(getStub.called).to.be.equal(true);
     expect(response).to.deep.equal(cat);
     getStub.restore();

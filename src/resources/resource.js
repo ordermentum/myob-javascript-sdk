@@ -5,10 +5,10 @@ export default function resource(path, name) {
       client,
       name,
 
-      findAll({ query = {},
+      findAll({ filter = null,
                 orderBy = null, top = 400, skip = 0 } = {}) {
-        client.logger.info('findAll', { path: this.path });
-        return client.get(this.path, { $filter: query, $orderby: orderBy, $top: top, $skip: skip })
+        client.logger.info('findAll', { path: this.path, filter, orderBy, top, skip });
+        return client.get(this.path, { $filter: filter, $orderby: orderBy, $top: top, $skip: skip })
                      .then(response => response[name]);
       },
 
