@@ -17,6 +17,9 @@ export default function expiredToken(instance, client, retries = 5) {
         config.headers.Authorization = `Bearer ${token.access_token}`;
         client.callback(token);
         return instance(config);
+      }).catch((e) => {
+        client.logger.error('could not refresh token', e);
+        throw error;
       });
     }
 

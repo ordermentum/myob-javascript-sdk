@@ -29,11 +29,7 @@ export default function authentication(clientId, secret, logger) {
     async refresh(currentToken) {
       logger.info('refreshing token', currentToken);
 
-      const token = this.instance.accessToken.create({
-        access_token: currentToken.accessToken,
-        refresh_token: currentToken.refreshToken,
-      });
-
+      const token = this.instance.accessToken.create(currentToken);
       const result = await token.refresh();
       return result.token;
     },

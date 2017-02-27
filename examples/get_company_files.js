@@ -4,8 +4,10 @@ const client = createClient({
   clientId: process.env.MYOB_CLIENT_ID,
   secret: process.env.MYOB_SECRET,
   callback: (token) => { console.log('************', token, '****************'); },
-  token: { accessToken: process.env.MYOB_TOKEN,
-           refreshToken: process.env.MYOB_REFRESH_TOKEN },
+  token: {
+    accessToken: process.env.MYOB_TOKEN,
+    refreshToken: process.env.MYOB_REFRESH_TOKEN,
+  },
 });
 
 
