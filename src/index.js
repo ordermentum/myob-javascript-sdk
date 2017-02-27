@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import Client from './client';
 import NULL_LOGGER from './logger';
 import resources from './resources';

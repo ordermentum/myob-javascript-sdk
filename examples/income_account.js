@@ -2,7 +2,7 @@ import createClient from '../src';
 
 const client = createClient({
   clientId: process.env.MYOB_CLIENT_ID,
-  token: { accessToken: process.env.MYOB_TOKEN, refreshToken: process.env.MYOB_REFRESH_TOKEN },
+  token: { access_token: process.env.MYOB_TOKEN, refresh_token: process.env.MYOB_REFRESH_TOKEN },
   secret: process.env.MYOB_SECRET,
   apiBase: process.env.BASE_URL,
   username: process.env.USERNAME,

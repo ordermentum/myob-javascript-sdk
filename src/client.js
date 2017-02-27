@@ -45,7 +45,7 @@ export default class Client {
       'x-myobapi-key': this.clientId,
       'x-myobapi-version': 'v2',
       'User-Agent': `Ordermentum MYOB Client ${pack.version}`,
-      Authorization: `Bearer ${this.token.accessToken}`,
+      Authorization: `Bearer ${this.token.access_token}`,
     };
 
     if (!root) {

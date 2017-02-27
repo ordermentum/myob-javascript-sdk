@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export default function expiredToken(instance, client, retries = 5) {
   return instance.interceptors.response.use(null, (error) => {
     const config = error.config;
@@ -9,9 +7,10 @@ export default function expiredToken(instance, client, retries = 5) {
     }
 
     config.expiredTokenRetry = config.expiredTokenRetry || 0;
+    const accessDenied = error.data && error.data.Message && error.data.Message === 'Access denied';
     const canTry = (!config.expiredTokenRetry || config.expiredTokenRetry < retries);
 
-    if (error.code !== 'ECONNABORTED' && error.response.status === 401 && canTry) {
+    if (error.code !== 'ECONNABORTED' && !accessDenied && error.response.status === 401 && canTry) {
       config.expiredTokenRetry += 1;
 
       return client.authentication.refresh(client.token).then((token) => {
