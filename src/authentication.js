@@ -1,7 +1,6 @@
-const oauth2 = require('simple-oauth2');
-import NULL_LOGGER from './logger';
+import oauth2 from 'simple-oauth2';
 
-export default function authentication(clientId, secret, logger = NULL_LOGGER) {
+export default function authentication(clientId, secret, logger) {
   const credentials = {
     client: {
       id: clientId,
@@ -51,7 +50,7 @@ export default function authentication(clientId, secret, logger = NULL_LOGGER) {
       logger.info('params being passed to accessToken call ', params);
 
       return this.instance.authorizationCode.getToken(params)
-                   .then(result => oauth2.accessToken.create(result));
+                   .then(result => this.instance.accessToken.create(result));
     },
   };
 }
