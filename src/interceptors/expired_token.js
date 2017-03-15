@@ -13,9 +13,9 @@ export default function expiredToken(instance, client, retries = 5) {
     if (error.code !== 'ECONNABORTED' && !accessDenied && error.response.status === 401 && canTry) {
       config.expiredTokenRetry += 1;
 
-      return client.authentication.refresh(client.token).then((token) => {
+      return client.authentication.refresh(client.token).then(async (token) => {
         config.headers.Authorization = `Bearer ${token.access_token}`;
-        client.callback(token);
+        await client.callback(token);
         return instance(config);
       }).catch((e) => {
         client.logger.error('could not refresh token', e);

@@ -52,7 +52,7 @@ describe('authentication', () => {
       const secret = 'test';
       const auth = authentication(clientId, secret);
       sandbox.stub(auth, 'instance', FAKE_INSTANCE);
-      expect(auth.getToken()).to.not.equal(null);
+      expect(auth.getAccessCodeUri('https://www.google.com')).to.not.equal(null);
     });
   });
 });

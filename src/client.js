@@ -9,7 +9,7 @@ const pack = require('../package');
 export default class Client {
   constructor({ clientId,
                 secret,
-                token = { }, logger, callback = () => {}, username, password,
+                token = { }, logger, callback = async () => {}, username, password,
                 timeout = 5000, apiBase = 'https://api.myob.com/accountright/' }) {
     this.apiBase = apiBase;
     this.token = token;
