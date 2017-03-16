@@ -26,6 +26,7 @@ function createClient({
 
   return {
     client,
+    accounts: resources.accounts(client),
     inventoryItems: resources.inventoryItems(client),
     invoiceItems: resources.invoiceItems(client),
     getCompanyFiles() { return client.getCompanyFiles(); },

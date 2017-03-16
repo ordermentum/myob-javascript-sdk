@@ -8,7 +8,7 @@ export default function resource(path, name) {
       findAll({ filter = null,
                 orderBy = null, top = 400, skip = 0 } = {}) {
         client.logger.info('findAll', { path: this.path, filter, orderBy, top, skip });
-        return client.get(this.path, { $filter: filter, $orderby: orderBy, $top: top, $skip: skip })
+        return client.get(this.path, { params: { $filter: filter, $orderby: orderBy, $top: top, $skip: skip } })
                      .then(response => response[name]);
       },
 
