@@ -1,5 +1,5 @@
 export default function expiredToken(instance, client, retries = 5) {
-  return instance.interceptors.response.use(null, (error) => {
+  return instance.interceptors.response.use(null, async (error) => {
     const config = error.config;
 
     if (!config) {
@@ -13,16 +13,21 @@ export default function expiredToken(instance, client, retries = 5) {
     if (error.code !== 'ECONNABORTED' && !accessDenied && error.response.status === 401 && canTry) {
       config.expiredTokenRetry += 1;
 
-      return client.authentication.refresh(client.token).then(async (token) => {
+      try {
+        const token = await client.authentication.refresh(client.token);
+        try {
+          await client.callback(token);
+        } catch (e) {
+          client.logger.error(e);
+        }
         config.headers.Authorization = `Bearer ${token.access_token}`;
-        await client.callback(token);
         return instance(config);
-      }).catch((e) => {
-        client.logger.error('could not refresh token', e);
-        throw error;
-      });
+      } catch (e) {
+        client.logger.error('could not refresh token', e, error);
+        return Promise.reject(e);
+      }
     }
 
-    throw error;
+    return Promise.reject(error);
   });
 }
