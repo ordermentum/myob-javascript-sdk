@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
+import NULL_LOGGER from 'null-logger';
+
 import resource from '../src/resources/resource';
-import NULL_LOGGER from '../src/logger';
 
 const FAKE_CLIENT = {
   post() {},
