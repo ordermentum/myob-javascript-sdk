@@ -15,4 +15,21 @@ See http://developer.myob.com/api/accountright/ for more details and registratio
 * /GeneralLedger/Job
 * /GeneralLedger/Category
 
-see `examples/` on how to use the SDK.
+
+# Usage
+
+```bash
+yarn add myob
+```
+
+```javascript
+const myob = require('myob').default;
+
+const client = myob.createClient({
+  clientId: process.env.MYOB_CLIENT_ID,
+  secret: process.env.MYOB_SECRET,
+});
+
+```
+
+see `examples/` more example code
