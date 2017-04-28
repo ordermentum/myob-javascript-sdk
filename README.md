@@ -1,4 +1,5 @@
 # MYOB AccountRight 2.0 Javascript SDK
+[![Build Status](https://travis-ci.org/ordermentum/myob-javascript-sdk.svg?branch=master)](https://travis-ci.org/ordermentum/myob-javascript-sdk)
 
 MYOB AccountRight 2.0 SDK (unofficial) for Node.js.
 
