@@ -30,6 +30,7 @@ function createClient({
     inventoryItems: resources.inventoryItems(client),
     invoiceItems: resources.invoiceItems(client),
     getCompanyFiles() { return client.getCompanyFiles(); },
+    getInfo() { return client.getInfo(); },
     contactCustomers: resources.contactCustomers(client),
     employees: resources.employees(client),
     taxCodes: resources.taxCodes(client),
