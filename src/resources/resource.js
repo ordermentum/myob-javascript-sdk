@@ -1,3 +1,5 @@
+import query from './query';
+
 export default function resource(path, name) {
   return client => (
     {
@@ -8,7 +10,13 @@ export default function resource(path, name) {
       findAll({ filter = null,
                 orderBy = null, top = 400, skip = 0 } = {}) {
         client.logger.info('findAll', { path: this.path, filter, orderBy, top, skip });
-        return client.get(this.path, { params: { $filter: filter, $orderby: orderBy, $top: top, $skip: skip } })
+
+        let $filter = filter;
+        if (filter && typeof filter !== 'string') {
+          $filter = query(filter);
+        }
+
+        return client.get(this.path, { params: { $filter, $orderby: orderBy, $top: top, $skip: skip } })
                      .then(response => response[name]);
       },
 
