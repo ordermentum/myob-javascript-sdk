@@ -1,4 +1,9 @@
 {
-  "presets": ["es2015", "stage-1"],
-  "plugins": ["transform-async-to-generator", "transform-flow-strip-types"],
+  "presets": ["flow", ["env", {
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ],
+  "plugins": ["transform-flow-strip-types"]
 }

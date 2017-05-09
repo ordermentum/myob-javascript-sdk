@@ -14,6 +14,9 @@ See http://developer.myob.com/api/accountright/ for more details and registratio
 
 * /Inventory/Item
 * /Sale/Invoice/Item
+* /Sale/Invoice/Service
+* /Sale/Order/Item
+* /Sale/Order/Service
 * /Contact/Customer
 * /Contact/Employee
 * /GeneralLedger/TaxCode
