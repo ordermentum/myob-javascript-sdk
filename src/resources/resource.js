@@ -6,10 +6,10 @@ export default function resource(path, name) {
       name,
 
       findAll({ filter = null,
-                orderBy = null, top = 400, skip = 0 } = {}) {
+                orderBy = null, top = 400, skip = 0, paginate = false } = {}) {
         client.logger.info('findAll', { path: this.path, filter, orderBy, top, skip });
         return client.get(this.path, { params: { $filter: filter, $orderby: orderBy, $top: top, $skip: skip } })
-                     .then(response => response[name]);
+                     .then(response => (paginate ? response : response[name]));
       },
 
       findOne(...args) {
