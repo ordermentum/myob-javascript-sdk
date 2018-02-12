@@ -1,6 +1,6 @@
 {
   "name": "myob",
-  "version": "0.3.16",
+  "version": "0.3.18",
   "main": "lib/index.js",
   "repository": "git@github.com:ordermentum/myob-javascript-sdk.git",
   "author": "John D'Agostino <john.dagostino@gmail.com>",
@@ -9,6 +9,7 @@
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.22.0",
+    "lodash.get": "^4.4.2",
     "moment": "^2.17.1",
     "null-logger": "^1.0.0",
     "qs": "^6.3.1",

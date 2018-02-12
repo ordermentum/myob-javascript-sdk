@@ -1,16 +1,25 @@
+import get from 'lodash.get';
+
 export default function expiredToken(instance, client, retries = 5) {
   return instance.interceptors.response.use(null, async (error) => {
     const config = error.config;
+    const connectionError = error && ['ECONNABORTED', 'ECONNREFUSED'].includes(error.code);
+
+    if (connectionError) {
+      return Promise.reject(error);
+    }
 
     if (!config) {
       return Promise.reject(error);
     }
 
     config.expiredTokenRetry = config.expiredTokenRetry || 0;
-    const accessDenied = error.data && error.data.Message && error.data.Message === 'Access denied';
+
+    const accessDenied = get(error, ['data', 'Message']) === 'Access denied';
+    const status = get(error, ['response', 'status']);
     const canTry = (!config.expiredTokenRetry || config.expiredTokenRetry < retries);
 
-    if (error.code !== 'ECONNABORTED' && !accessDenied && error.response.status === 401 && canTry) {
+    if (!accessDenied && status === 401 && canTry) {
       config.expiredTokenRetry += 1;
 
       try {
