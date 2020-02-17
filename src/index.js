@@ -41,4 +41,6 @@ function createClient({
   };
 }
 
+export * from './client';
+export * from './resources';
 export default createClient;
