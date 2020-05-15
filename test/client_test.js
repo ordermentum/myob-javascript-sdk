@@ -1,6 +1,7 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Client from '../src/client';
+import { createClient } from '../src';
 
 describe('Client', () => {
   let sandbox;
@@ -17,11 +18,13 @@ describe('Client', () => {
     const apiBase = 'https://api.myob.com';
     const logger = console;
     const token = { accessToken: 'test' };
+    const callback = (token) => { };
     const secret = 'test';
     const clientId = 'test';
-    const client = new Client({ apiBase, secret, clientId, logger, token });
+    const client = new Client({ apiBase, callback, secret, clientId, logger, token });
     expect(client.token).to.equal(token);
     expect(client.logger).to.equal(logger);
+    expect(client.callback).to.equal(callback);
     expect(client.apiBase).to.equal(apiBase);
   });
 
@@ -58,6 +61,17 @@ describe('Client', () => {
     instance.put.resolves({ data: 'DATA' });
     data = await client.put('/');
     expect(data).to.equal('DATA');
+  });
+
+  it('createClient', async () => {
+    const apiBase = 'https://api.myob.com';
+    const logger = console;
+    const token = { accessToken: 'test' };
+    const callback = (token) => { };
+    const secret = 'test';
+    const clientId = 'test';
+    const client = createClient({ apiBase, callback, secret, clientId, logger, token });
+    expect(client.callback).to.equal(callback);
   });
 
   it('hosted', async () => {

@@ -11,18 +11,21 @@ function createClient({
   logger = NULL_LOGGER,
   username,
   password,
+  callback,
   timeout = 5000,
   apiBase = 'https://api.myob.com/accountright/',
- }) {
+}) {
   const client = new Client({
     clientId,
     username,
     password,
     secret,
+    callback,
     token,
     apiBase,
     timeout,
-    logger });
+    logger
+  });
 
   return {
     client,
