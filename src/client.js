@@ -3,6 +3,7 @@ import NULL_LOGGER from 'null-logger';
 
 import rateLimit from './interceptors/rate_limit';
 import expiredToken from './interceptors/expired_token';
+import timeoutInterceptor from './interceptors/axios_timeout';
 import authentication from './authentication';
 
 const pack = require('../package');
@@ -46,6 +47,7 @@ export default class Client {
 
     if (this.clientId) {
       expiredToken(instance, this, 2);
+      timeoutInterceptor(instance);
     }
 
     return instance;
