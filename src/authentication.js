@@ -27,7 +27,7 @@ export default function authentication(clientId, secret, logger) {
     },
 
     async refresh(currentToken) {
-      logger.info('refreshing token', currentToken);
+      logger.debug('refreshing token', currentToken);
 
       const token = this.instance.accessToken.create(currentToken);
       const result = await token.refresh();
@@ -42,8 +42,8 @@ export default function authentication(clientId, secret, logger) {
         scope: 'CompanyFile',
       };
 
-      logger.info('credentials object being passed is ', credentials);
-      logger.info('params being passed to accessToken call ', params);
+      logger.debug('credentials object being passed is ', credentials);
+      logger.debug('params being passed to accessToken call ', params);
 
       return this.instance.authorizationCode.getToken(params)
                    .then(result => this.instance.accessToken.create(result));
