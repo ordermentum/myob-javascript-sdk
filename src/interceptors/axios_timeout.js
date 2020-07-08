@@ -19,6 +19,6 @@ export default function timeoutInterceptor(instance) {
       });
     }
   
-    return { ...config, cancelToken: source.token };
+    return Object.assign({}, config, {cancelToken: source.token});
   });
 }
