@@ -3064,9 +3064,10 @@ npmlog@^4.0.2:
     gauge "~2.7.1"
     set-blocking "~2.0.0"
 
-null-logger@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/null-logger/-/null-logger-1.0.0.tgz#d6b58b5d07de49891f21a5cc2670e62016e7c0e0"
+null-logger@^2.0.0:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/null-logger/-/null-logger-2.0.4.tgz#5e9ca2a63bc629cc9bf5335fa2b9ed4c200953e6"
+  integrity sha512-HI1duml+9W9NOeIoeJCNC3Z+BGeLq+1s1bD6KWpVt6c9UCFU3kV2dkAQdSci0zjLNU6jiL+MUBhXjDidu8C52g==
 
 number-is-nan@^1.0.0:
   version "1.0.1"
