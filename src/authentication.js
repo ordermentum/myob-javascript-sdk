@@ -1,4 +1,4 @@
-import oauth2 from 'simple-oauth2';
+import {AuthorizationCode} from 'simple-oauth2';
 
 export default function authentication(clientId, secret, logger) {
   const credentials = {
@@ -11,14 +11,18 @@ export default function authentication(clientId, secret, logger) {
       authorizePath: '/oauth2/account/authorize',
       tokenPath: '/oauth2/v1/authorize',
     },
+    options:  {
+      authorizationMethod: 'body'
+    }
   };
-  const instance = oauth2.create(credentials);
+  const instance = new AuthorizationCode(credentials);
+
   return {
     credentials,
     instance,
 
     getAccessCodeUri(redirectUri) {
-      const authorizationUri = this.instance.authorizationCode.authorizeURL({
+      const authorizationUri = instance.authorizeURL({
         redirect_uri: redirectUri,
         scope: 'CompanyFile',
       });
@@ -29,7 +33,7 @@ export default function authentication(clientId, secret, logger) {
     async refresh(currentToken) {
       logger.debug('refreshing token', currentToken);
 
-      const token = this.instance.accessToken.create(currentToken);
+      const token = instance.createToken(currentToken);
       const result = await token.refresh();
       return result.token;
     },
@@ -45,8 +49,7 @@ export default function authentication(clientId, secret, logger) {
       logger.debug('credentials object being passed is ', credentials);
       logger.debug('params being passed to accessToken call ', params);
 
-      return this.instance.authorizationCode.getToken(params)
-                   .then(result => this.instance.accessToken.create(result));
+      return instance.getToken(params);
     },
   };
 }
