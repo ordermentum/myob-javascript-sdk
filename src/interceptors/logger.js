@@ -6,8 +6,8 @@ export const loggerInterceptor = (instance, client) => {
           'Response Headers',
           JSON.stringify(response.headers, null, 2)
         );
-        return response;
       }
+      return response;
     },
     (error) => {
       Promise.reject(error);
