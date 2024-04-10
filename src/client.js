@@ -5,6 +5,7 @@ import rateLimit from './interceptors/rate_limit';
 import expiredToken from './interceptors/expired_token';
 import timeoutInterceptor from './interceptors/axios_timeout';
 import authentication from './authentication';
+import loggerInterceptor from './interceptors/logger';
 
 const pack = require('../package');
 
@@ -15,9 +16,10 @@ const MYOB_BASE = 'https://api.myob.com/accountright/';
 
 export default class Client {
   constructor({ clientId = null,
-                secret = null,
-                token = {}, logger = NULL_LOGGER, callback = async () => {}, username, password,
-                timeout = 5000, apiBase = MYOB_BASE }) {
+    secret = null,
+    token = {}, logger = NULL_LOGGER, callback = async () => { }, username, password,
+    verbose = false,
+    timeout = 5000, apiBase = MYOB_BASE }) {
     this.apiBase = apiBase;
     this.token = token || {};
     this.logger = logger;
@@ -25,6 +27,7 @@ export default class Client {
     this.adapter = axios;
     this.username = username;
     this.password = password;
+    this.verbose = verbose;
     this.clientId = clientId;
     this.secret = secret;
     this.timeout = timeout;
@@ -44,6 +47,7 @@ export default class Client {
     });
 
     rateLimit(instance, 5);
+    loggerInterceptor(instance, this);
 
     if (this.clientId) {
       expiredToken(instance, this, 2);
@@ -81,43 +85,43 @@ export default class Client {
 
   getCompanyFiles() {
     return this.getInstance(true)
-               .get(this.apiBase)
-               .then(response => response.data);
+      .get(this.apiBase)
+      .then(response => response.data);
   }
 
   getInfo() {
     return this.getInstance(true)
-               .get('/info')
-               .then(response => response.data);
+      .get('/info')
+      .then(response => response.data);
   }
 
   getUserToken() {
     return new Buffer(`${this.username}:${this.password}`)
-                    .toString('base64');
+      .toString('base64');
   }
 
   get(...args) {
     return this.instance.get(...args)
-    .then(r => r.data);
+      .then(r => r.data);
   }
 
   post(...args) {
     return this.instance.post(...args)
-    .then(r => r.data);
+      .then(r => r.data);
   }
 
   patch(...args) {
     return this.instance.patch(...args)
-    .then(r => r.data);
+      .then(r => r.data);
   }
 
   put(...args) {
     return this.instance.put(...args)
-    .then(r => r.data);
+      .then(r => r.data);
   }
 
   delete(...args) {
     return this.instance.delete(...args)
-    .then(r => r.data);
+      .then(r => r.data);
   }
 }
