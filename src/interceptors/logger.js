@@ -8,9 +8,6 @@ export const loggerInterceptor = (instance, client) => {
         );
       }
       return response;
-    },
-    (error) => {
-      Promise.reject(error);
     }
   );
 };
