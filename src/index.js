@@ -10,6 +10,7 @@ function createClient({
   username,
   password,
   callback,
+  verbose = false,
   timeout = 5000,
   apiBase = 'https://api.myob.com/accountright/',
 }) {
@@ -20,6 +21,7 @@ function createClient({
     secret,
     callback,
     token,
+    verbose,
     apiBase,
     timeout,
     logger
