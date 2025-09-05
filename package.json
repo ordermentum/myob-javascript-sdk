@@ -48,7 +48,7 @@
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
-    "flow-bin": "0.280.0",
+    "flow-bin": "0.281.0",
     "mocha": "3.5.3",
     "nyc": "10.3.2",
     "sinon": "2.4.1"
