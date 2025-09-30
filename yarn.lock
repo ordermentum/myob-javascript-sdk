@@ -399,12 +399,12 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.12.0.tgz#ce1c9d143389679e253b314241ea9aa5cec980d3"
   integrity sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==
 
-axios@^0.30.0:
-  version "0.30.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.30.1.tgz#7ab803b877eca707ea5f4de55ea0358fe26898e0"
-  integrity sha512-2XabsR1u0/B6OoKy57/xJmPkQiUvdoV93oW4ww+Xjee7C2er/O5U77lvqycDkT2VQDtfjYcjw8ZV8GDaoqwjHQ==
+axios@^1.0.0:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.12.2.tgz#6c307390136cf7a2278d09cec63b136dfc6e6da7"
+  integrity sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==
   dependencies:
-    follow-redirects "^1.15.4"
+    follow-redirects "^1.15.6"
     form-data "^4.0.4"
     proxy-from-env "^1.1.0"
 
@@ -2351,7 +2351,7 @@ flow-bin@0.287.0:
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.287.0.tgz#b4a5714cb38e603986a07c62e4d8a4c61c35708c"
   integrity sha512-GYASmje2SOjhSm6Xr7itYbeiAmPm+lNzF/vAHsFE8aj7lCCPnLE6YePj6mVZEZKqqtRmP5SbPA5+mOxog/o/RA==
 
-follow-redirects@^1.15.4:
+follow-redirects@^1.15.6:
   version "1.15.11"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.11.tgz#777d73d72a92f8ec4d2e410eb47352a56b8e8340"
   integrity sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==
