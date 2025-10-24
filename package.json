@@ -29,7 +29,7 @@
     "reporter": "nyc --reporter=html yarn run test"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.28.4",
+    "@babel/eslint-parser": "7.28.5",
     "@types/simple-oauth2": "^5.0.7",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
