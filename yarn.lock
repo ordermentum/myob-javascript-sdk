@@ -79,9 +79,9 @@
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
 "@types/simple-oauth2@^5.0.7":
-  version "5.0.7"
-  resolved "https://registry.yarnpkg.com/@types/simple-oauth2/-/simple-oauth2-5.0.7.tgz#92df8c2fba8ec58c9fea6dd3206d4395de19e721"
-  integrity sha512-8JbWVJbiTSBQP/7eiyGKyXWAqp3dKQZpaA+pdW16FCi32ujkzRMG8JfjoAzdWt6W8U591ZNdHcPtP2D7ILTKuA==
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@types/simple-oauth2/-/simple-oauth2-5.0.8.tgz#ec0c51a7df267e5d41b0b063aecdd34a312e9310"
+  integrity sha512-TehQqoOGdy3/rmFsCEGgnt1f4JhUCA0joWemGGCTbVYvoZvfBjkRsBFYmz8k0V/sn2XQZHe33L4lWxqMhIO3tQ==
 
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
