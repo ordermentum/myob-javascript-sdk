@@ -50,7 +50,7 @@
     "eslint-plugin-react": "6.10.3",
     "flow-bin": "0.302.0",
     "mocha": "3.5.3",
-    "nyc": "10.3.2",
+    "nyc": "18.0.0",
     "sinon": "2.4.1"
   }
 }
